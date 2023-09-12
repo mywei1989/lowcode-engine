@@ -76,7 +76,6 @@ export interface IDocumentModel extends Omit<IPublicModelDocumentModel<
   'onChangeSelection' |
   'onMountNode' |
   'onChangeNodeProp' |
-  'onImportSchema' |
   'isDetectingNode' |
   'onFocusNodeChanged' |
   'onDropLocationChanged'
@@ -363,6 +362,10 @@ export class DocumentModel implements IDocumentModel {
     return () => {
       this.designer.editor?.eventBus.off(EDITOR_EVENT.NODE_CHILDREN_CHANGE, fn);
     };
+  }
+
+  onImportSchema(fn: (schema: IPublicTypeRootSchema) => void): IPublicTypeDisposable {
+    return this.designer.editor?.eventBus.on('shell.document.importSchema', fn as any);
   }
 
   addWillPurge(node: INode) {

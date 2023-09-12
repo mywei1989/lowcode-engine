@@ -343,7 +343,7 @@ export class DocumentModel implements IPublicModelDocumentModel {
    * @param fn
    */
   onImportSchema(fn: (schema: IPublicTypeRootSchema) => void): IPublicTypeDisposable {
-    return this[editorSymbol].eventBus.on('shell.document.importSchema', fn as any);
+    return this[documentSymbol].onImportSchema(fn);
   }
 
   isDetectingNode(node: IPublicModelNode): boolean {

@@ -1,5 +1,5 @@
 import type { ComponentLifecycle, CSSProperties } from 'react';
-import { BuiltinSimulatorHost, BuiltinSimulatorRenderer } from '@alilc/lowcode-designer';
+import { BuiltinSimulatorRenderer, ISimulatorHost } from '@alilc/lowcode-designer';
 import { RequestHandler, IPublicTypeNodeSchema, IPublicTypeRootSchema, IPublicTypeJSONObject } from '@alilc/lowcode-types';
 
 export type ISchema = IPublicTypeNodeSchema | IPublicTypeRootSchema;
@@ -196,7 +196,7 @@ export interface IBaseRendererProps {
   __components: Record<string, any>;
   __ctx: Record<string, any>;
   __schema: IPublicTypeRootSchema;
-  __host?: BuiltinSimulatorHost;
+  __host?: ISimulatorHost;
   __container?: BuiltinSimulatorRenderer;
   config?: Record<string, any>;
   designMode?: 'design';

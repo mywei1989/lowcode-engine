@@ -20,7 +20,7 @@ import {
 } from '@alilc/lowcode-types';
 import { megreAssets, IPublicTypeAssetsJson, isNodeSchema, isDragNodeObject, isDragNodeDataObject, isLocationChildrenDetail, Logger } from '@alilc/lowcode-utils';
 import { IProject, Project } from '../project';
-import { Node, DocumentModel, insertChildren, INode } from '../document';
+import { Node, DocumentModel, insertChildren, INode, IDocumentModel } from '../document';
 import { ComponentMeta, IComponentMeta } from '../component-meta';
 import { INodeSelector, Component } from '../simulator';
 import { Scroller } from './scroller';
@@ -77,6 +77,8 @@ export interface IDesigner {
   get detecting(): Detecting;
 
   get simulatorComponent(): ComponentType<any> | undefined;
+
+  get currentDocument(): IDocumentModel;
 
   createScroller(scrollable: IPublicTypeScrollable): IPublicModelScroller;
 

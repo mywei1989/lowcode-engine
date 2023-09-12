@@ -1,5 +1,5 @@
-import { INode, IPublicTypePropChangeOptions } from '@alilc/lowcode-designer';
-import { GlobalEvent, IPublicEnumTransformStage, IPublicTypeNodeSchema, IPublicTypeEngineOptions } from '@alilc/lowcode-types';
+import { INode, IPublicTypePropChangeOptions, ISimulatorHost } from '@alilc/lowcode-designer';
+import { GlobalEvent, IPublicEnumTransformStage, IPublicTypeNodeSchema, IPublicTypeEngineOptions, IPublicTypeSimulatorRenderer } from '@alilc/lowcode-types';
 import { isReactComponent, cloneEnumerableProperty } from '@alilc/lowcode-utils';
 import { debounce } from '../utils/common';
 import adapter from '../adapter';
@@ -81,7 +81,20 @@ class LeafCache {
 
   ref = new Map();
 
-  constructor(public documentId: string, public device: string) {
+  constructor(public documentId: string, public device: string, {
+    host,
+    container,
+  }: {
+    host?: ISimulatorHost;
+    container?: IPublicTypeSimulatorRenderer<any, any>;
+  }) {
+    this.event.set('global', {
+      dispose: [
+        host?.designer.currentDocument.onImportSchema(() => {
+          container?.rerender();
+        }),
+      ],
+    });
   }
 }
 
@@ -179,7 +192,10 @@ export function leafWrapper(Comp: types.IBaseRenderComponent, {
     cache?.event.forEach(event => {
       event.dispose?.forEach((disposeFn: any) => disposeFn && disposeFn());
     });
-    cache = new LeafCache(curDocumentId, curDevice);
+    cache = new LeafCache(curDocumentId, curDevice, {
+      host,
+      container,
+    });
   }
 
   if (!isReactComponent(Comp)) {
