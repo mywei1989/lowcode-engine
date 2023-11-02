@@ -458,3 +458,47 @@ skeleton.add({
   },
 });
 ```
+
+### 默认盯住的左侧面板
+```typescript
+skeleton.add({
+    area: 'leftArea',
+    name: 'test',
+    type: 'PanelDock',
+    content: {
+        name: 'test',
+        props: {
+            icon: 'xxx'
+        },
+        panelProps: {
+            floatable: true,
+            title: 'test',
+            area: 'leftFixedArea'
+        },
+        content: 'sss'
+    }
+})
+```
+
+### 不展示面板标题栏
+
+```typescript
+skeleton.add({
+    area: 'leftArea',
+    name: 'test',
+    type: 'PanelDock',
+    content: {
+        name: 'test',
+        props: {
+            icon: 'xxx',
+        },
+        panelProps: {
+            floatable: true,
+            title: 'test',
+            hideTitleBar: true,
+        },
+        content: 'sss'
+    }
+})
+```
+
