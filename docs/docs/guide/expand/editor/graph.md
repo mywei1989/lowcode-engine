@@ -11,6 +11,8 @@ sidebar_position: 8
 ```bash
 cd demo-graph-x6
 ```
+
+test
 ### 安装依赖
 在 lowcode-demo/demo-graph-x6目录下执行：
 ```bash
