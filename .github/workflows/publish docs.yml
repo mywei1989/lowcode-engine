@@ -3,7 +3,7 @@ name: Update and Publish Docs
 on:
   push:
     branches:
-      - develop
+      - liujuping-patch-2
     paths:
       - 'docs/**'
 
